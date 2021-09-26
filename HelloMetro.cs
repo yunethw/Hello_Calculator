@@ -12,8 +12,10 @@ namespace Hello_Metro
 {
     public partial class HelloMetro : MetroFramework.Forms.MetroForm
     {
-        protected double num1 = 0;
+        protected double num1= 0;
+        protected double nummult = 1;
         protected double num2, final;
+        protected bool first = true;
         protected string signmap;
 
         public Dictionary<string, int> Operation = new Dictionary<string, int>
@@ -27,25 +29,41 @@ namespace Hello_Metro
         private void Operator(string sign)
         {
             textbox_top.Text = textbox_top.Text + textbox_calc.Text + " " + sign + " ";
-            num1 = Convert.ToDouble(textbox_calc.Text);
-            /* switch (Operation[sign]) //need to fix this
-             {
-                 case 1:
-                     num1 /= Convert.ToDouble(textbox_calc.Text);
-                     break;
 
-                 case 2:
-                     num1 *= Convert.ToDouble(textbox_calc.Text);
-                     break;
+            switch (Operation[sign]) //need to fix this
+            {
+            case 1:
+                if(first)
+                {
+                    num1 = Convert.ToDouble(textbox_calc.Text);
+                    first = false;
+                }
+                else
+                {
+                    num1 /= Convert.ToDouble(textbox_calc.Text);
+                }
+                break;
 
-                 case 3:
-                     num1 += Convert.ToDouble(textbox_calc.Text);
-                     break;
+            case 2:
+                nummult *= Convert.ToDouble(textbox_calc.Text);
+                break;
 
-                 case 4:
-                     num1 -= Convert.ToDouble(textbox_calc.Text);
-                     break;
-             }*/
+            case 3:
+                num1 += Convert.ToDouble(textbox_calc.Text);
+                break;
+
+            case 4:
+                if (first)
+                {
+                    num1 = Convert.ToDouble(textbox_calc.Text);
+                    first = false;
+                }
+                else
+                {
+                    num1 -= Convert.ToDouble(textbox_calc.Text);
+                }
+                break;
+            }
 
             signmap = sign;
             textbox_calc.Clear();
@@ -68,6 +86,7 @@ namespace Hello_Metro
             textbox_calc.Focus();
         }
 
+        #region //numericalbuttonclicks
         private void button_1_Click(object sender, EventArgs e)
         {
             CalcBox("1");
@@ -117,22 +136,26 @@ namespace Hello_Metro
         {
             CalcBox("0");
         }
+        #endregion
 
         private void buttonPoint_Click(object sender, EventArgs e)
         {
             CalcBox(".");
         }
 
-        private void buttonC_Click(object sender, EventArgs e)
+        //clear button
+        private void buttonC_Click(object sender, EventArgs e) 
         {
             textbox_top.Clear();
             textbox_calc.Clear();
             num1 = 0;
             num2 = 0;
+            nummult = 1;
             final = 0;
-
+            first = true;
         }
 
+        #region //operator buttons
         private void buttonSub_Click(object sender, EventArgs e)
         {
             Operator("-");
@@ -152,6 +175,7 @@ namespace Hello_Metro
         {
             Operator("+");
         }
+        #endregion
 
         private void buttonEq_Click(object sender, EventArgs e)
         {
@@ -164,7 +188,7 @@ namespace Hello_Metro
                     break;
 
                 case 2:
-                    final = num1 * num2;
+                    final = nummult * num2;
                     break;
 
                 case 3:
