@@ -118,6 +118,11 @@ namespace Hello_Metro
             CalcBox("0");
         }
 
+        private void buttonPoint_Click(object sender, EventArgs e)
+        {
+            CalcBox(".");
+        }
+
         private void buttonC_Click(object sender, EventArgs e)
         {
             textbox_top.Clear();

@@ -453,6 +453,7 @@ namespace Hello_Metro
             this.buttonPoint.Size = new System.Drawing.Size(50, 50);
             this.buttonPoint.TabIndex = 26;
             this.buttonPoint.UseVisualStyleBackColor = false;
+            this.buttonPoint.Click += new System.EventHandler(this.buttonPoint_Click);
             // 
             // label11
             // 
@@ -703,7 +704,7 @@ namespace Hello_Metro
             // 
             // HelloMetro
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(5F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(295, 453);
